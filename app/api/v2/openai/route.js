@@ -14,6 +14,7 @@ export const POST = async (req) => {
                 role: "user",
                 content: `${prompt}`
             }],
+
             max_tokens: 1500,
         })
         const newPrompt = new Prompt({
