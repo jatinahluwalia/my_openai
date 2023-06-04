@@ -6,8 +6,7 @@ import { Prompt } from '@/models/prompts'
 export const POST = async (req) => {
     try {
         await dbConfig()
-        const { prompt } = await req.json()
-        console.log(prompt);
+        const { prompt, name } = await req.json()
         const description = await openai.createChatCompletion({
             model: 'gpt-3.5-turbo',
             messages: [{
@@ -18,6 +17,7 @@ export const POST = async (req) => {
             max_tokens: 1500,
         })
         const newPrompt = new Prompt({
+            username: name,
             prompt: prompt,
             description: description.data.choices[0].message.content
         })

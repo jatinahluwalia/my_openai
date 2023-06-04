@@ -1,6 +1,9 @@
 import { Schema, model, models } from "mongoose"
 
 const promptSchema = new Schema({
+    username: {
+        type: String,
+    },
     prompt: {
         type: String,
     },
