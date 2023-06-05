@@ -29,11 +29,11 @@ export default function Chat() {
                 <label htmlFor="prompt" className="mb-5">Type here:</label>
                 <input type="text" placeholder="Type Anything..." name="prompt" id="prompt" className="shadow-md px-4 py-2 rounded-full mb-5" />
             </div>
+            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
             {loading && <Loader />}
             {description && <div className="text-2xl">
                 <p className="text-gray-600">{description}</p>
             </div>}
-            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
         </form>
     )
 }

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Loader from "@/components/Loader/Loader"
+import { set } from "mongoose"
 
 export default function ImageGeneration() {
     const [loading, setLoading] = useState(false)
@@ -9,16 +10,21 @@ export default function ImageGeneration() {
     const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault()
-        const res = await fetch('/api/v2/openai/image', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: e.target.name.value,
-                prompt: e.target.prompt.value
+        try {
+            const res = await fetch('/api/v2/openai/image', {
+                method: 'POST',
+                body: JSON.stringify({
+                    name: e.target.name.value,
+                    prompt: e.target.prompt.value
+                })
             })
-        })
-        const data = await res.json()
-        setDescription(data.description)
-        setLoading(false)
+            const data = await res.json()
+            setDescription(data.description)
+            setLoading(false)
+        } catch (error) {
+            console.log(error.message);
+            setLoading(false)
+        }
     }
     return (
         <form onSubmit={handleSubmit} className="flex flex-col mx-auto gap-4 text-3xl p-5" style={{ height: "100dvh" }}>
@@ -29,11 +35,11 @@ export default function ImageGeneration() {
                 <label htmlFor="prompt" className="mb-5">Describe Image: </label>
                 <input type="text" placeholder="Image Details..." name="prompt" id="prompt" className="shadow-md px-4 py-2 rounded-full mb-5" />
             </div>
+            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
             {loading && <Loader />}
             {description && <div className="text-2xl">
                 <img src={description} alt="cant load" className="max-w-full rounded-md shadow-lg" />
             </div>}
-            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
         </form>
     )
 }
