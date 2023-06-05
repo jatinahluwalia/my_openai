@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Loader from "@/components/Loader/Loader"
-import { set } from "mongoose"
 
 export default function Chat() {
     const [loading, setLoading] = useState(false)

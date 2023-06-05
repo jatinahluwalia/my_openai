@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import Loader from "@/components/Loader/Loader"
-import { set } from "mongoose"
 
 export default function ImageGeneration() {
     const [loading, setLoading] = useState(false)
@@ -18,6 +17,7 @@ export default function ImageGeneration() {
                     prompt: e.target.prompt.value
                 })
             })
+            console.log(data);
             const data = await res.json()
             setDescription(data.description)
             setLoading(false)
