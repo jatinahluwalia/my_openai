@@ -22,3 +22,7 @@ export const POST = async (req) => {
         console.log(error.message);
     }
 }
+
+export const GET = async () => {
+    return new Response(JSON.stringify({ message: 'Hello World' }))
+}
