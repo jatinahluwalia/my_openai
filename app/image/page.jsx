@@ -22,8 +22,9 @@ export default function ImageGeneration() {
             setDescription(data.description)
             setLoading(false)
         } catch (error) {
-            console.log(error.message);
-            setLoading(false)
+            console.log(error);
+            setLoading(false);
+            setDescription('Error Occured')
         }
     }
     return (
@@ -35,8 +36,8 @@ export default function ImageGeneration() {
                 <label htmlFor="prompt" className="mb-5">Describe Image: </label>
                 <input type="text" placeholder="Image Details..." name="prompt" id="prompt" className="shadow-md px-4 py-2 rounded-full mb-5" />
             </div>
-            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
             {loading && <Loader />}
+            <button className="mt-auto rounded-full px-4 py-2 bg-blue-400">SUBMIT</button>
             {description && <div className="text-2xl">
                 <img src={description} alt="cant load" className="max-w-full rounded-md shadow-lg" />
             </div>}
